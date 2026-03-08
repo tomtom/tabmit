@@ -24,7 +24,7 @@ Bug reports and feature requests: [github.com/tomtom/tabmit/issues](https://gith
 
 ### Desktop (Firefox 140+)
 
-Install from [Firefox Add-ons (AMO)](#) *(link to be added after publication)*.
+Install from [Firefox Add-ons (AMO)](https://addons.mozilla.org/en-US/firefox/addon/tabmit/)
 
 **Temporary install (development):**
 
