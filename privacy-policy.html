@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabmit — Privacy Policy</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+    }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.15rem; margin-top: 2rem; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th, td { border: 1px solid #ccc; padding: 0.45rem 0.7rem; text-align: left; vertical-align: top; }
+    th { background: #f5f5f5; }
+    p { margin: 0.6rem 0; }
+  </style>
+</head>
+<body>
+
+<h1>Privacy Policy — Tabmit</h1>
+<p><strong>Last updated: 2026-03-22</strong></p>
+
+<p>
+  Tabmit ("the extension") is a browser extension that submits the content of
+  the current browser tab by e-mail or to a Notion database or a TabMitTag
+  server of your choice.
+</p>
+
+<h2>Data collected and processed</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Purpose</th>
+      <th>Stored where</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Page title, URL, visible text, and HTML of the current browser tab</td>
+      <td>Composing the e-mail or page body you are sending</td>
+      <td>
+        Processed locally in your browser only. Never sent to the extension
+        developer. Forwarded only to the destination you choose (your mail
+        client, Notion, or your own TabMitTag server).
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Profile configuration (recipient e-mail addresses, Notion database IDs,
+        TabMitTag server URL, body-format preferences)
+      </td>
+      <td>Remembering how you want to submit pages</td>
+      <td>
+        <code>chrome.storage.sync</code> — stored in your Google account and
+        synced across your devices by Google.
+      </td>
+    </tr>
+    <tr>
+      <td>Notion Internal Integration Token (<code>ntn_…</code>)</td>
+      <td>Authenticating with the Notion API on your behalf</td>
+      <td><code>chrome.storage.sync</code> (see above)</td>
+    </tr>
+    <tr>
+      <td>TabMitTag credentials (username and password)</td>
+      <td>Re-authenticating with your self-hosted TabMitTag server</td>
+      <td><code>chrome.storage.sync</code> (see above)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Data sharing</h2>
+
+<ul>
+  <li>
+    <strong>E-mail client (mailto / Gmail):</strong> page content is passed to
+    your mail client via a URL or placed on the system clipboard. It is then
+    handled entirely by your mail application.
+  </li>
+  <li>
+    <strong>Notion:</strong> page content is sent directly from your browser to
+    the Notion API (<code>api.notion.com</code>) using the token you provide.
+  </li>
+  <li>
+    <strong>TabMitTag:</strong> page content is sent directly from your browser
+    to the server URL you configure. That server is operated by you or a third
+    party of your choice — not by the extension developer.
+  </li>
+  <li>
+    <strong>Extension developer:</strong> The developer of Tabmit receives
+    <strong>no data whatsoever</strong>. No analytics, no telemetry, and no
+    crash reports are collected or transmitted.
+  </li>
+</ul>
+
+<h2>Permissions justification</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Permission</th>
+      <th>Why it is needed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>activeTab</code> / <code>scripting</code></td>
+      <td>
+        Read the title, URL, and content of the tab you explicitly choose to
+        submit by clicking the toolbar button or selecting a profile from the
+        right-click menu.
+      </td>
+    </tr>
+    <tr>
+      <td><code>storage</code></td>
+      <td>Save your profiles and credentials locally via Chrome sync storage.</td>
+    </tr>
+    <tr>
+      <td><code>contextMenus</code></td>
+      <td>
+        Add the "TabMit" entry to the browser right-click menu so you can
+        choose a profile without opening the toolbar popup.
+      </td>
+    </tr>
+    <tr>
+      <td><code>clipboardWrite</code></td>
+      <td>
+        Write the self-contained HTML version of a page to the OS clipboard
+        when the "Clipboard" body format is selected. Only activated when you
+        invoke a clipboard-format profile.
+      </td>
+    </tr>
+    <tr>
+      <td><code>notifications</code></td>
+      <td>
+        Show a prompt reminding you to paste clipboard content into the email
+        body after the HTML has been copied.
+      </td>
+    </tr>
+    <tr>
+      <td><code>bookmarks</code></td>
+      <td>
+        Access your bookmark folders when the Bookmark-folder dispatch feature
+        is configured in a profile.
+      </td>
+    </tr>
+    <tr>
+      <td><code>&lt;all_urls&gt;</code> host permission</td>
+      <td>
+        Inject a content script into any page the user chooses to submit. This
+        is required by the Chrome <code>scripting</code> API. The extension
+        only reads the page you actively invoke it on; it does not monitor
+        browsing activity in the background.
+      </td>
+    </tr>
+    <tr>
+      <td><code>https://api.notion.com/</code></td>
+      <td>
+        Send page content to Notion when a Notion profile is used.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Data retention and deletion</h2>
+
+<p>
+  All configuration data is stored in <code>chrome.storage.sync</code> under
+  your Google account. You can delete it at any time by:
+</p>
+<ul>
+  <li>Opening the extension's <strong>Settings</strong> page and deleting individual profiles, or</li>
+  <li>Removing the extension from Chrome entirely, which clears all locally held data.</li>
+</ul>
+<p>
+  Page content forwarded to Notion or a TabMitTag server is governed by the
+  privacy policies of those services, not this one.
+</p>
+
+<h2>Changes to this policy</h2>
+
+<p>
+  If this policy changes materially, the "Last updated" date at the top of this
+  page will be updated. Continued use of the extension after a policy update
+  constitutes acceptance of the revised policy.
+</p>
+
+<h2>Contact</h2>
+
+<p>
+  Questions or concerns:
+  <a href="https://github.com/tomtom/tabmit/issues">github.com/tomtom/tabmit/issues</a>
+</p>
+
+</body>
+</html>
