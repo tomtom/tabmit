@@ -1,203 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabmit — Privacy Policy</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      max-width: 720px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      line-height: 1.6;
-      color: #222;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabmit — Privacy Policy</title>
+<style>
+  :root {
+    --bg:           #ffffff;
+    --fg:           #202124;
+    --fg-muted:     #5f6368;
+    --border:       #e0e0e0;
+    --accent:       #1a73e8;
+    --table-head:   #f8f9fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:         #202124;
+      --fg:         #e8eaed;
+      --fg-muted:   #9aa0a6;
+      --border:     #3c4043;
+      --accent:     #8ab4f8;
+      --table-head: #292a2d;
     }
-    h1 { font-size: 1.6rem; }
-    h2 { font-size: 1.15rem; margin-top: 2rem; }
-    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
-    th, td { border: 1px solid #ccc; padding: 0.45rem 0.7rem; text-align: left; vertical-align: top; }
-    th { background: #f5f5f5; }
-    p { margin: 0.6rem 0; }
-  </style>
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+    line-height: 1.6;
+  }
+  h1 { font-size: 26px; margin-bottom: 4px; }
+  h2 { font-size: 18px; margin-top: 36px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .updated { color: var(--fg-muted); font-size: 13px; margin-bottom: 28px; }
+  a { color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--table-head); }
+  code { background: var(--table-head); padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+  ul { padding-left: 22px; }
+  strong.note { display: block; margin-top: 8px; }
+</style>
 </head>
 <body>
 
 <h1>Privacy Policy — Tabmit</h1>
-<p><strong>Last updated: 2026-03-22</strong></p>
+<p class="updated">Last updated: 2026-08-17</p>
 
-<p>
-  Tabmit ("the extension") is a browser extension that submits the content of
-  the current browser tab by e-mail or to a Notion database or a TabMitTag
-  server of your choice.
-</p>
+<h2>What Tabmit does</h2>
+<p>Tabmit is a browser extension that sends the content of the current browser tab (or, for
+bookmark-folder profiles, a batch of bookmarked tabs) to a destination of your choice: your
+default e-mail client, Gmail, Notion, Google Drive, OneDrive, Dropbox, or a TabMitTag server you
+control. Every submission is initiated explicitly by you — either by clicking the toolbar button,
+using the right-click menu, or manually running a bookmark-folder profile. Tabmit never acts
+automatically or in the background on its own. Tabmit does not collect any user data for the
+developer's own purposes.</p>
 
-<h2>Data collected and processed</h2>
-
+<h2>What data is transmitted and where it goes</h2>
+<p>When you invoke a profile, Tabmit reads the following data from the active tab (or, for a
+binary file such as a PDF, downloads the file itself) and forwards it to the service configured
+in that profile:</p>
 <table>
-  <thead>
-    <tr>
-      <th>Data</th>
-      <th>Purpose</th>
-      <th>Stored where</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Page title, URL, visible text, and HTML of the current browser tab</td>
-      <td>Composing the e-mail or page body you are sending</td>
-      <td>
-        Processed locally in your browser only. Never sent to the extension
-        developer. Forwarded only to the destination you choose (your mail
-        client, Notion, or your own TabMitTag server).
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Profile configuration (recipient e-mail addresses, Notion database IDs,
-        TabMitTag server URL, body-format preferences)
-      </td>
-      <td>Remembering how you want to submit pages</td>
-      <td>
-        <code>chrome.storage.sync</code> — stored in your Google account and
-        synced across your devices by Google.
-      </td>
-    </tr>
-    <tr>
-      <td>Notion Internal Integration Token (<code>ntn_…</code>)</td>
-      <td>Authenticating with the Notion API on your behalf</td>
-      <td><code>chrome.storage.sync</code> (see above)</td>
-    </tr>
-    <tr>
-      <td>TabMitTag credentials (username and password)</td>
-      <td>Re-authenticating with your self-hosted TabMitTag server</td>
-      <td><code>chrome.storage.sync</code> (see above)</td>
-    </tr>
-  </tbody>
+  <tr><th>Data</th><th>Destination</th></tr>
+  <tr><td>Page title</td><td>Every destination</td></tr>
+  <tr><td>Page URL</td><td>Every destination (when "Include page URL" is enabled)</td></tr>
+  <tr><td>Page content (HTML and/or plain text, or extracted PDF text)</td><td>Every destination</td></tr>
+  <tr><td>Extracted keywords/tags</td><td>Notion, and other destinations that support tagging</td></tr>
+  <tr><td>Images and stylesheets embedded in the page</td><td>Inlined into the email body (Gmail/clipboard profiles only); never sent to Tabmit</td></tr>
+  <tr><td>The bookmarked page's URL, and (for bookmark-folder profiles) actions taken on the bookmark itself (kept, moved, or deleted)</td><td>Your own browser's bookmarks, not transmitted anywhere external</td></tr>
 </table>
 
-<h2>Data sharing</h2>
-
+<p>The destination is always a service that <strong>you</strong> control and authenticate to
+directly:</p>
 <ul>
-  <li>
-    <strong>E-mail client (mailto / Gmail):</strong> page content is passed to
-    your mail client via a URL or placed on the system clipboard. It is then
-    handled entirely by your mail application.
-  </li>
-  <li>
-    <strong>Notion:</strong> page content is sent directly from your browser to
-    the Notion API (<code>api.notion.com</code>) using the token you provide.
-  </li>
-  <li>
-    <strong>TabMitTag:</strong> page content is sent directly from your browser
-    to the server URL you configure. That server is operated by you or a third
-    party of your choice — not by the extension developer.
-  </li>
-  <li>
-    <strong>Extension developer:</strong> The developer of Tabmit receives
-    <strong>no data whatsoever</strong>. No analytics, no telemetry, and no
-    crash reports are collected or transmitted.
-  </li>
+  <li><strong>Default mail client (<code>mailto:</code>)</strong> — data is passed to your
+    operating system's default mail application via a <code>mailto:</code> URL. It never leaves
+    your device until you click Send.</li>
+  <li><strong>Gmail</strong> <em>(Chrome only)</em> — data is sent directly to
+    <code>mail.google.com</code>/<code>gmail.googleapis.com</code> to pre-fill a compose window or
+    draft, using an OAuth token scoped to <code>gmail.compose</code> only. Tabmit does not use a
+    server intermediary.</li>
+  <li><strong>Notion</strong> — data is sent to <code>api.notion.com</code>, either using an
+    Integration Token you created and provided, or (in "cookie mode") your existing Notion browser
+    session. Pages/blocks are created in the workspace and database you selected.</li>
+  <li><strong>Google Drive</strong> <em>(Chrome only)</em> — data is uploaded to
+    <code>googleapis.com</code> (Drive and, for folder selection, Picker APIs) using an OAuth token
+    scoped to <code>drive.file</code> only — this scope limits Tabmit's access to files/folders you
+    explicitly select through Google's own folder picker; it cannot see or list the rest of your
+    Drive.</li>
+  <li><strong>OneDrive</strong> — data is uploaded to the Microsoft Graph API
+    (<code>graph.microsoft.com</code>) using an OAuth token obtained via Microsoft's own sign-in
+    flow, scoped to the folder you configure.</li>
+  <li><strong>Dropbox</strong> — data is uploaded to the Dropbox API
+    (<code>api.dropboxapi.com</code>/<code>content.dropboxapi.com</code>) using an OAuth token
+    obtained via Dropbox's own sign-in flow (Authorization Code + PKCE).</li>
+  <li><strong>TabMitTag</strong> — data is sent to a server URL <strong>you configure</strong>
+    (your own TabMitTag instance), authenticated either with your session cookie for that server or
+    an API key you provide.</li>
 </ul>
+<strong class="note">No data is ever sent to the Tabmit developer or any server operated by the developer.</strong>
 
-<h2>Permissions justification</h2>
-
+<h2>What data is stored locally</h2>
+<p>Tabmit stores the following data in your browser's <code>chrome.storage.local</code> (or
+<code>browser.storage.local</code> on Firefox), which stays on the device it was created on and is
+<strong>not</strong> synced across your devices:</p>
 <table>
-  <thead>
-    <tr>
-      <th>Permission</th>
-      <th>Why it is needed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>activeTab</code> / <code>scripting</code></td>
-      <td>
-        Read the title, URL, and content of the tab you explicitly choose to
-        submit by clicking the toolbar button or selecting a profile from the
-        right-click menu.
-      </td>
-    </tr>
-    <tr>
-      <td><code>storage</code></td>
-      <td>Save your profiles and credentials locally via Chrome sync storage.</td>
-    </tr>
-    <tr>
-      <td><code>contextMenus</code></td>
-      <td>
-        Add the "TabMit" entry to the browser right-click menu so you can
-        choose a profile without opening the toolbar popup.
-      </td>
-    </tr>
-    <tr>
-      <td><code>clipboardWrite</code></td>
-      <td>
-        Write the self-contained HTML version of a page to the OS clipboard
-        when the "Clipboard" body format is selected. Only activated when you
-        invoke a clipboard-format profile.
-      </td>
-    </tr>
-    <tr>
-      <td><code>notifications</code></td>
-      <td>
-        Show a prompt reminding you to paste clipboard content into the email
-        body after the HTML has been copied.
-      </td>
-    </tr>
-    <tr>
-      <td><code>bookmarks</code></td>
-      <td>
-        Access your bookmark folders when the Bookmark-folder dispatch feature
-        is configured in a profile.
-      </td>
-    </tr>
-    <tr>
-      <td><code>&lt;all_urls&gt;</code> host permission</td>
-      <td>
-        Inject a content script into any page the user chooses to submit. This
-        is required by the Chrome <code>scripting</code> API. The extension
-        only reads the page you actively invoke it on; it does not monitor
-        browsing activity in the background.
-      </td>
-    </tr>
-    <tr>
-      <td><code>https://api.notion.com/</code></td>
-      <td>
-        Send page content to Notion when a Notion profile is used.
-      </td>
-    </tr>
-  </tbody>
+  <tr><th>Item</th><th>Purpose</th></tr>
+  <tr><td>Profile definitions (name, client type, destination folder/recipient/database, format and other options)</td><td>Remembers your configured profiles</td></tr>
+  <tr><td>Notion integration token</td><td>Authenticates requests to the Notion API; stored encrypted with a passphrase you set</td></tr>
+  <tr><td>TabMitTag server URL and, in API-key mode, the API key you provide</td><td>Authenticates requests to your own TabMitTag server</td></tr>
+  <tr><td>Default profile selection</td><td>Determines which profile is invoked by default</td></tr>
+  <tr><td>Recent submission log (URL + timestamp, overall and per-profile)</td><td>Powers the toolbar icon submission indicator and the "skip already submitted" bookmark-folder option</td></tr>
+  <tr><td>Bookmark-folder processing log</td><td>Records success/failure/skip status per bookmark for the report shown after a bookmark-folder run</td></tr>
+  <tr><td>Paywall-detection rules and custom global settings (timeouts, PDF-text limits, etc.)</td><td>Lets you customize extension behavior</td></tr>
 </table>
+<p>OAuth access tokens for Gmail, Google Drive, OneDrive, and Dropbox are managed by the browser's
+own identity APIs (or Dropbox/OneDrive/Google's own sign-in flow) and are not written into Tabmit's
+own storage.</p>
+<p>This data is stored <strong>only on your own device(s)</strong>. The developer has no access to
+it.</p>
 
-<h2>Data retention and deletion</h2>
-
-<p>
-  All configuration data is stored in <code>chrome.storage.sync</code> under
-  your Google account. You can delete it at any time by:
-</p>
+<h2>Third-party services</h2>
+<p>When you use a Gmail, Google Drive, OneDrive, Dropbox, Notion, or TabMitTag profile, data is
+transmitted to that service. Their own privacy policies apply:</p>
 <ul>
-  <li>Opening the extension's <strong>Settings</strong> page and deleting individual profiles, or</li>
-  <li>Removing the extension from Chrome entirely, which clears all locally held data.</li>
+  <li>Google (Gmail, Google Drive): <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></li>
+  <li>Microsoft (OneDrive): <a href="https://privacy.microsoft.com/">privacy.microsoft.com</a></li>
+  <li>Dropbox: <a href="https://www.dropbox.com/privacy">dropbox.com/privacy</a></li>
+  <li>Notion: <a href="https://www.notion.so/privacy">notion.so/privacy</a></li>
+  <li>TabMitTag: the privacy policy of the server you configure, which you control</li>
 </ul>
-<p>
-  Page content forwarded to Notion or a TabMitTag server is governed by the
-  privacy policies of those services, not this one.
-</p>
 
-<h2>Changes to this policy</h2>
-
-<p>
-  If this policy changes materially, the "Last updated" date at the top of this
-  page will be updated. Continued use of the extension after a policy update
-  constitutes acceptance of the revised policy.
-</p>
+<h2>Permissions used</h2>
+<table>
+  <tr><th>Permission</th><th>Why it is needed</th></tr>
+  <tr><td><code>activeTab</code></td><td>Read the current tab's title, URL, and content when you click the toolbar button</td></tr>
+  <tr><td><code>scripting</code></td><td>Inject a one-shot script to capture the live page DOM (title, URL, HTML, selected text)</td></tr>
+  <tr><td><code>storage</code></td><td>Persist your profiles and settings in <code>chrome.storage.local</code></td></tr>
+  <tr><td><code>contextMenus</code></td><td>Add profiles to the browser right-click menu</td></tr>
+  <tr><td><code>clipboardWrite</code></td><td>Write self-contained HTML to the clipboard for clipboard-mode profiles</td></tr>
+  <tr><td><code>notifications</code></td><td>Show a brief confirmation notice after a page is submitted</td></tr>
+  <tr><td><code>bookmarks</code></td><td>Read bookmarks from a user-selected folder to submit multiple pages in sequence, and move/delete processed bookmarks (bookmark-folder profiles)</td></tr>
+  <tr><td><code>declarativeNetRequestWithHostAccess</code></td><td>Set a mobile User-Agent for a bookmarked page's tab when a bookmark-folder profile requests the site's mobile version, so simplified mobile markup can be captured</td></tr>
+  <tr><td><code>offscreen</code></td><td>Run a hidden document with DOM access so the service worker can parse and inline HTML (Chrome only)</td></tr>
+  <tr><td><code>identity</code></td><td>Obtain OAuth tokens to authenticate Gmail API and Google Drive API calls, each scoped to only the API being used (Chrome only)</td></tr>
+  <tr><td><code>sandbox</code> (Chrome only)</td><td>Load Google's own Picker widget in an isolated page so you can choose a Google Drive folder without granting Tabmit broad Drive access</td></tr>
+  <tr><td><code>host_permissions: &lt;all_urls&gt;</code></td><td>Fetch images/stylesheets for inlining into Gmail/clipboard email bodies, and upload binary tabs (e.g. PDFs) to your chosen destination</td></tr>
+  <tr><td><code>host_permissions: api.notion.com</code></td><td>Send page content to the Notion API using the integration token or session you provided</td></tr>
+  <tr><td><code>cookies</code> (optional)</td><td>Read your existing Notion session cookie when you opt into Notion "cookie mode", requested only when you enable that option</td></tr>
+</table>
 
 <h2>Contact</h2>
-
-<p>
-  Questions or concerns:
-  <a href="https://github.com/tomtom/tabmit/issues">github.com/tomtom/tabmit/issues</a>
-</p>
+<p>Questions or concerns: <a href="https://github.com/tomtom/tabmit/issues">github.com/tomtom/tabmit/issues</a></p>
 
 </body>
 </html>
